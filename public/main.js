@@ -1,7 +1,8 @@
 const containerFluid = document.querySelector('.container-fluid');
 const inputName = document.querySelector('.inputName');
 const inputDescription = document.querySelector('.inputDescription');
-const inputPice = document.querySelector('.inputPrice');
+const inputPrice = document.querySelector('.inputPrice');
+const submitButton = document.querySelector('.submit')
 
 fetch("/icecreams")
     .then(myData => myData.json())
@@ -41,7 +42,7 @@ submitButton.addEventListener('click', function (e) {
 
     (async () => {
         //we voeren de fetch uit naar de url /user-add, gebruiken de POST methode en gaan json versturen in de body
-        const rawResponse = await fetch('/user-add', {
+        const rawResponse = await fetch('/add-icecreams', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -53,7 +54,7 @@ submitButton.addEventListener('click', function (e) {
         const content = await rawResponse.json();
 
         //in het object wat we terugkrijgen verwachten we de property userAdded die ofwel true of false is
-        if(content.userAdded){
+        if(content.icecreamAdded){
             //als de waarde true is dan is de gebruiker toegevoegd
             alert('Gebruiker toegevoegd');
         } else{

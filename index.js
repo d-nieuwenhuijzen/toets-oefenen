@@ -2,12 +2,13 @@ import express from 'express';
 import cors from 'cors';
 import {} from 'dotenv/config';
 import { MongoClient } from 'mongodb';
+import bodyParser from 'body-parser';
 
 const app = express();
 const port = 3000;
 
 app.use(cors());
-
+app.use(bodyParser.json())
 app.use(express.static('public'));
 app.get('/', (req, res) => {
     res.send('hoi');
@@ -71,10 +72,10 @@ async function insertIcecream(name, description, price) {
             
 app.post('/add-icecreams', (req, res) => {
     //de email en het password worden uit de body gelezen (let op dat je body-parser gebruikt)
-    const name = req.body.name;
+    const name = req.body.icecream;
     const description = req.body.description;
     const price = req.body.price;
     //de insertDocument functie wordt aangeroepen en daarna wordt er een JSON object naar de browser gestuurd met success: true
-    insertIcecream(name, description, price).then(res.send({ success: true }));
+    insertIcecream(name, description, price).then(res.send({ icecreamAdded: true }));
 });
 
